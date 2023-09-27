@@ -25,7 +25,7 @@ export function Form({ onSubmit }: FormProps) {
         onChange={(e) => setTask(e.target.value)}
       />
 
-      <button type="submit">
+      <button type="submit" disabled={!task}>
         Add <BsPlusCircle />
       </button>
     </form>

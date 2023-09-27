@@ -1,0 +1,25 @@
+.wrapper {
+  max-width: 740px;
+  margin: 100px auto 60px auto;
+
+}
+
+.headerContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 25px;
+  border-bottom: 1px solid var(--gray-300);
+}
+
+.headerContainer h3 {
+  color: var(--blue);
+  font-size: 14px;
+}
+
+.headerContainer h3 span {
+  background-color: var(--gray-400);
+  color:  var(--gray-200);
+  padding: 2px 8px;
+  border-radius: 50%;
+}
