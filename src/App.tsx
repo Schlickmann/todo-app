@@ -1,4 +1,4 @@
-import { ComponentProps, useState } from "react";
+import { ComponentProps, useMemo, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 
 import { Form } from "./components/Form";
@@ -13,6 +13,13 @@ function App() {
     []
   );
 
+  const completedTodos = useMemo(() => {
+    return todos.filter((todo) => todo.isCompleted).length;
+  }, [todos]);
+  const totalTodos = useMemo(() => {
+    return todos.length;
+  }, [todos]);
+
   const addTask = (task: string) => {
     setTodos([
       ...todos,
@@ -24,6 +31,18 @@ function App() {
     ]);
   };
 
+  const removeTask = (id: string) => {
+    setTodos(todos.filter((todo) => todo.id !== id));
+  };
+
+  const toggleTask = (id: string) => {
+    setTodos(
+      todos.map((todo) =>
+        todo.id === id ? { ...todo, isCompleted: !todo.isCompleted } : todo
+      )
+    );
+  };
+
   return (
     <>
       <Header />
@@ -31,13 +50,22 @@ function App() {
       <div className={styles.wrapper}>
         <div className={styles.headerContainer}>
           <h3>
-            Todos created <span>0</span>
+            Todos created <span>{totalTodos}</span>
           </h3>
           <h3>
-            Todos completed <span>0</span>
+            Todos completed{" "}
+            <span>
+              {totalTodos === 0
+                ? completedTodos
+                : `${completedTodos} of ${totalTodos}`}
+            </span>
           </h3>
         </div>
-        {!todos.length ? <EmptyState /> : <TodoList todos={todos} />}
+        {!todos.length ? (
+          <EmptyState />
+        ) : (
+          <TodoList todos={todos} onRemove={removeTask} onToggle={toggleTask} />
+        )}
       </div>
     </>
   );

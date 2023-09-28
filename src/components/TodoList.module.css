@@ -1,5 +1,33 @@
 .todoListContainer {
   display: flex;
   list-style: none;
+  flex-direction: column;
+}
 
+.todoListItem {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 1rem;
+  background-color: var(--gray-500);
+  border-radius: 8px;
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+.todoListItem span {
+  font-size: 0.875rem;
+  flex: auto;
+}
+
+.todoListItem span[aria-checked=true] {
+  text-decoration: line-through;
+  opacity: 0.5;
+}
+
+.todoListItem button {
+  background-color: transparent;
+  border: none;
+  padding: 6px;
+  cursor: pointer;
 }
